@@ -29,7 +29,7 @@ class ECommerceApp extends StatelessWidget {
           return BlocBuilder<AuthCubit, AuthState>(
             bloc: cubit,
             buildWhen: (previous, current) =>
-                current is AuthSuccess /* || current is AuthInitial */,
+                current is AuthSuccess || current is AuthInitial ,
             builder: (context, state) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,

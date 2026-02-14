@@ -2,16 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class SocialMediaButton extends StatelessWidget {
-  final String text;
-  final String imageUrl;
-  final VoidCallback onTap;
+  final String? text;
+  final String? imageUrl;
+  final VoidCallback? onTap;
+  final bool isLoading;
 
-  const SocialMediaButton({
+  SocialMediaButton({
     super.key,
-    required this.text,
-    required this.imageUrl,
-    required this.onTap,
-  });
+    this.text,
+    this.imageUrl,
+    this.onTap,
+    this.isLoading = false,
+  }) {
+    assert((text != null && imageUrl != null) || isLoading == true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,17 +36,22 @@ class SocialMediaButton extends StatelessWidget {
             alignment: .center,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: .center,
-                children: [
-                  CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    height: size.height * 0.035,
-                  ),
-                  SizedBox(width: size.width * 0.02),
-                  Text(text, style: Theme.of(context).textTheme.titleMedium),
-                ],
-              ),
+              child: isLoading
+                  ? const CircularProgressIndicator.adaptive()
+                  : Row(
+                      mainAxisAlignment: .center,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: imageUrl!,
+                          height: size.height * 0.035,
+                        ),
+                        SizedBox(width: size.width * 0.02),
+                        Text(
+                          text!,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
             ),
           ),
         ),

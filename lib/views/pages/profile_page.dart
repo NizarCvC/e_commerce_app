@@ -21,7 +21,7 @@ class ProfilePage extends StatelessWidget {
             buildWhen: (previous, current) => current is AuthLoggingOut,
             listener: (context, state) {
               if (state is AuthLoggedOut) {
-                Navigator.of(context).pushNamedAndRemoveUntil(
+                Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
                   AppRoutes.loginPageRoute,
                   (route) => false,
                 );

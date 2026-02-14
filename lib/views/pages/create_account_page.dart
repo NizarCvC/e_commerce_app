@@ -147,14 +147,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     ),
                     SizedBox(height: size.height * 0.02),
                     SocialMediaButton(
-                      text: 'Sign In with Google',
+                      text: 'Sign Up with Google',
                       imageUrl:
                           'https://image.similarpng.com/file/similarpng/original-picture/2020/06/Logo-google-icon-PNG.png',
                       onTap: () {},
                     ),
                     SizedBox(height: size.height * 0.02),
                     SocialMediaButton(
-                      text: 'Sign In with Facebook',
+                      text: 'Sign Up with Facebook',
                       imageUrl:
                           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/960px-2021_Facebook_icon.svg.png',
                       onTap: () {},

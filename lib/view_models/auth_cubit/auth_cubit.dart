@@ -6,7 +6,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  final AuthServicesImpl authService = AuthServicesImpl();
+  final authService = AuthServicesImpl();
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
     emit(AuthLoading());
@@ -54,6 +54,22 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthLoggedOut());
     } catch (e) {
       emit(AuthLogoutError(e.toString()));
+    }
+  }
+
+  Future<void> authenticatingWithGoogle() async {
+    emit(GoogleAuthenticating());
+
+    try {
+      final isAuthenticated = await authService.authenticateWithGoogle();
+      if (isAuthenticated){
+        emit(GoogleAuthSuccess());
+      }
+      else { 
+        emit(GoogleAuthError("Google authentication failed"));
+      }
+    } catch (e) {
+      emit(GoogleAuthError(e.toString()));
     }
   }
 }

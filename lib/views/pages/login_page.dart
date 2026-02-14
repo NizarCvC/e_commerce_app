@@ -122,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                                 _emailOrPhoneController.text,
                                 _passwordController.text,
                               );
-                              // Navigator.of(context).pushNamed(AppRoutes.homeRoute);
                             }
                           },
                           hight: size.height * 0.06,
@@ -146,11 +145,36 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: size.height * 0.02),
-                    SocialMediaButton(
-                      text: 'Sign In with Google',
-                      imageUrl:
-                          'https://image.similarpng.com/file/similarpng/original-picture/2020/06/Logo-google-icon-PNG.png',
-                      onTap: () {},
+                    BlocConsumer<AuthCubit, AuthState>(
+                      listenWhen: (previous, current) =>
+                          current is GoogleAuthSuccess ||
+                          current is GoogleAuthError,
+                      listener: (context, state) {
+                        if (state is GoogleAuthSuccess) {
+                          Navigator.of(context).pushNamed(AppRoutes.homeRoute);
+                        } else if (state is GoogleAuthError) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.message)),
+                          );
+                        }
+                      },
+                      buildWhen: (previous, current) =>
+                          current is GoogleAuthenticating ||
+                          current is GoogleAuthSuccess ||
+                          current is GoogleAuthError,
+                      builder: (context, state) {
+                        if (state is GoogleAuthenticating) {
+                          return SocialMediaButton(isLoading: true);
+                        }
+                        return SocialMediaButton(
+                          text: 'Sign In with Google',
+                          imageUrl:
+                              'https://image.similarpng.com/file/similarpng/original-picture/2020/06/Logo-google-icon-PNG.png',
+                          onTap: () async {
+                            await cubit.authenticatingWithGoogle();
+                          },
+                        );
+                      },
                     ),
                     SizedBox(height: size.height * 0.02),
                     SocialMediaButton(
