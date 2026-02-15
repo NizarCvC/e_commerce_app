@@ -1,6 +1,6 @@
 name: e_commerce_app
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -19,6 +19,7 @@ dependencies:
   firebase_auth: ^6.1.4
   google_sign_in: ^6.3.0
   flutter_facebook_auth: ^7.1.5
+  cloud_firestore: ^6.1.2
 
 dev_dependencies:
   flutter_test:
