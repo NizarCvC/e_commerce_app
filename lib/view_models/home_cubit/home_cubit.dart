@@ -1,19 +1,22 @@
 import 'package:e_commerce_app/models/home_carousel_item_model.dart';
 import 'package:e_commerce_app/models/product_item_model.dart';
+import 'package:e_commerce_app/services/home_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
+  final _homeServices = HomeServicesImpl();
+
   HomeCubit() : super(HomeInitial());
 
-  void getHomeData() {
+  Future<void> getHomeData() async {
     emit(HomeLoading());
-    Future.delayed(
-      const Duration(seconds: 1),
-      () => emit(
-        HomeLoaded(products: products, carouselItems: homeCarouselItems),
-      ),
-    );
+    try {
+      final products = await _homeServices.fetchProducts();
+      emit(HomeLoaded(products: products, carouselItems: homeCarouselItems));
+    } catch (e) {
+      HomeError(message: e.toString());
+    }
   }
 }

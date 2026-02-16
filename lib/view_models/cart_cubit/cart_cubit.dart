@@ -17,7 +17,7 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  void incrementCounter(int value, int productId) {
+  void incrementCounter(int value, String productId) {
     quantity = value + 1;
     int productIndex = cartItems.indexWhere((e) => e.productId == productId);
     cartItems[productIndex] = cartItems[productIndex].copyWith(
@@ -27,7 +27,7 @@ class CartCubit extends Cubit<CartState> {
     emit(SubtotalUpdated(subtotal: _subTotal));
   }
 
-  void decrementCounter(int value, int productId) {
+  void decrementCounter(int value, String productId) {
     quantity = value - 1;
     int productIndex = cartItems.indexWhere((e) => e.productId == productId);
     cartItems[productIndex] = cartItems[productIndex].copyWith(

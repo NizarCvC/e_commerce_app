@@ -9,7 +9,7 @@ enum ProductSize {
 }
 
 class ProductItemModel {
-  final int id;
+  final String id;
   final String name;
   final String imageUrl;
   final double price;
@@ -33,11 +33,46 @@ class ProductItemModel {
     this.availableSizes,
     this.availableColors,
   });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'imageUrl': imageUrl,
+      'price': price,
+      //'isFavorite': isFavorite,
+      'category': category,
+      'averageRate': averageRate,
+      'description': description,
+      // 'availableSizes': availableSizes.map((x) => x?.toMap()).toList(),
+      // 'availableColors': availableColors.map((x) => x?.toMap()).toList(),
+    };
+  }
+
+  factory ProductItemModel.fromMap(
+    Map<String, dynamic> map,
+    String documentId,
+  ) {
+    return ProductItemModel(
+      id: documentId,
+      name: map['name'] as String,
+      imageUrl: map['imageUrl'] as String,
+      price: (map['price'] as num).toDouble(),
+      // isFavorite: map['isFavorite'] as bool,
+      category: map['category'] as String,
+      averageRate: (map['averageRate'] as num).toDouble(),
+      description:
+          (map['description'] as String?) ??
+          "Hello World Hello World Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World",
+      // availableSizes: map['availableSizes'] != null ? List<ProductSize>.from((map['availableSizes'] as List<int>).map<ProductSize?>((x) => ProductSize.fromMap(x as Map<String,dynamic>),),) : null,
+      // availableColors: map['availableColors'] != null ? List<Color?>.from((map['availableColors'] as List<int>).map<Color??>((x) => Color?.fromMap(x as Map<String,dynamic>),),) : null,
+    );
+  }
 }
 
 List<ProductItemModel> products = [
   ProductItemModel(
-    id: 1,
+    id: '1',
     name: 'Bulova Watch',
     imageUrl:
         'https://media.beaverbrooks.co.uk/i/beaverbrooks/bulova-collections-marine-star-0425?fmt=jpg&fmt.jpeg.interlaced=true&img404=default-404',
@@ -47,7 +82,7 @@ List<ProductItemModel> products = [
     availableColors: [Colors.black, Colors.brown, Colors.grey, Colors.yellow],
   ),
   ProductItemModel(
-    id: 2,
+    id: '2',
     name: 'Zala bag',
     imageUrl:
         'https://nestasia.in/cdn/shop/files/Handbag_2_f448355a-317a-428f-8903-66fc11ff61f9.jpg?v=1706518975',
@@ -57,7 +92,7 @@ List<ProductItemModel> products = [
     availableColors: [Colors.black, Colors.brown, Colors.pink, Colors.red],
   ),
   ProductItemModel(
-    id: 3,
+    id: '3',
     name: 'Ayta Slippers',
     imageUrl:
         'https://img.joomcdn.net/2808a78f4970336f7e234b2d633341bc0003d6c7_400_400.jpeg',
@@ -67,7 +102,7 @@ List<ProductItemModel> products = [
     availableColors: [Colors.blueGrey, Colors.brown],
   ),
   ProductItemModel(
-    id: 4,
+    id: '4',
     name: 'Circle Earrings',
     imageUrl:
         'https://img.joomcdn.net/ab5a1533cccddf36290e94772a988b0f15765395_400_400.jpeg',
@@ -77,7 +112,7 @@ List<ProductItemModel> products = [
     availableColors: [Colors.amber, Colors.grey[400]],
   ),
   ProductItemModel(
-    id: 5,
+    id: '5',
     name: 'Sheepskin Leather',
     imageUrl:
         'https://img.joomcdn.net/cfb5c6929cc5a7343ed5ca80d4196adda3c33e59_400_400.jpeg',
@@ -92,7 +127,7 @@ List<ProductItemModel> products = [
     ],
   ),
   ProductItemModel(
-    id: 6,
+    id: '6',
     name: 'Polo Shirt',
     imageUrl:
         'https://img.joomcdn.net/902bd5fff39252e52f53da8f527b63836c154f6c_400_400.jpeg',

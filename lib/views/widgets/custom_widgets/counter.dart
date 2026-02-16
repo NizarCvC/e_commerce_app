@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Counter extends StatelessWidget {
   final int value;
   final dynamic cubit;
-  final int? productId;
+  final String? productId;
   const Counter({
     super.key,
     required this.value,

@@ -40,7 +40,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     selectedColor = color;
   }
 
-  void addToCart(int productId) {
+  void addToCart(String productId) {
     emit(ProductAddingToCart());
     final cartItem = AddToCartModel(
       productId: productId,

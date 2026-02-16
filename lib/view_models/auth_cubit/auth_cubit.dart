@@ -1,4 +1,7 @@
+import 'package:e_commerce_app/models/user_model.dart';
 import 'package:e_commerce_app/services/auth_services.dart';
+import 'package:e_commerce_app/services/firestore_services.dart';
+import 'package:e_commerce_app/utils/api_paths.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';
@@ -6,13 +9,14 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  final authService = AuthServicesImpl();
+  final _authServices = AuthServicesImpl();
+  final _fireStoreServices = FirestoreServices.instance;
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
     emit(AuthLoading());
 
     try {
-      final isAuthenticated = await authService.loginWithEmailAndPassword(
+      final isAuthenticated = await _authServices.loginWithEmailAndPassword(
         email,
         password,
       );
@@ -23,24 +27,44 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> registerWithPhoneAndPassword(
+    String username,
     String email,
     String password,
   ) async {
     emit(AuthLoading());
 
     try {
-      final isRegistered = await authService.registerWithPhoneAndPassword(
+      final isRegistered = await _authServices.registerWithPhoneAndPassword(
         email,
         password,
       );
-      isRegistered ? emit(AuthSuccess()) : emit(AuthError("Register Failed"));
+      if (isRegistered) {
+        await _saveUserData(username, email);
+        emit(AuthSuccess());
+      } else {
+        emit(AuthError("Register Failed"));
+      }
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
+  Future<void> _saveUserData(String username, String email) async {
+    final currentUser = _authServices.currentUser();
+    final userModel = UserModel(
+      id: currentUser!.uid,
+      username: username,
+      email: email,
+      createdAt: DateTime.now().toIso8601String(),
+    );
+    await _fireStoreServices.setData(
+      path: ApiPaths.users(userModel.id),
+      data: userModel.toMap()
+    );
+  }
+
   void checkAuth() {
-    final user = authService.currentUser();
+    final user = _authServices.currentUser();
     if (user != null) {
       emit(AuthSuccess());
     }
@@ -50,7 +74,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoggingOut());
 
     try {
-      await authService.logout();
+      await _authServices.logout();
       emit(AuthLoggedOut());
     } catch (e) {
       emit(AuthLogoutError(e.toString()));
@@ -61,11 +85,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(GoogleAuthenticating());
 
     try {
-      final isAuthenticated = await authService.authenticateWithGoogle();
-      if (isAuthenticated){
+      final isAuthenticated = await _authServices.authenticateWithGoogle();
+      if (isAuthenticated) {
         emit(GoogleAuthSuccess());
-      }
-      else { 
+      } else {
         emit(GoogleAuthError("Google authentication failed"));
       }
     } catch (e) {

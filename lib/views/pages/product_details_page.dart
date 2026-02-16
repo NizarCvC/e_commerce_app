@@ -136,7 +136,7 @@ class ProductDetailsPage extends StatelessWidget {
   Widget _buildAddToCartButton(
     BuildContext context,
     ProductDetailsCubit cubit,
-    int productId,
+    String productId,
   ) {
     return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       bloc: cubit,

@@ -3,7 +3,7 @@ import 'package:e_commerce_app/models/product_item_model.dart';
 import 'package:flutter/material.dart';
 
 class AddToCartModel {
-  final int productId;
+  final String productId;
   final int quantity;
   final Color? color;
   final ProductSize? size;
@@ -21,7 +21,7 @@ class AddToCartModel {
   double get totalPrices => productItem.price * quantity;
 
   AddToCartModel copyWith({
-    int? productId,
+    String? productId,
     int? quantity,
     Color? color,
     ProductSize? size,
@@ -36,6 +36,6 @@ class AddToCartModel {
 }
 
 List<AddToCartModel> cartItems = [
-  AddToCartModel(productId: 2, quantity: 2, color: Colors.black),
-  AddToCartModel(productId: 6, quantity: 1, size: ProductSize.M),
+  AddToCartModel(productId: '2', quantity: 2, color: Colors.black),
+  AddToCartModel(productId: '6', quantity: 1, size: ProductSize.M),
 ];

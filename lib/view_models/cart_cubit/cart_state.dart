@@ -21,7 +21,7 @@ final class CartError extends CartState {
 
 final class QuantityCounterLoaded extends CartState {
   final int value;
-  final int productId;
+  final String productId;
 
   QuantityCounterLoaded({required this.value, required this.productId});
 }

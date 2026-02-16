@@ -122,6 +122,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               await cubit.registerWithPhoneAndPassword(
+                                _usernameController.text,
                                 _emailOrPhoneController.text,
                                 _passwordController.text,
                               );
