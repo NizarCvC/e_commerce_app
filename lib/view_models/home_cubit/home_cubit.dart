@@ -13,8 +13,11 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getHomeData() async {
     emit(HomeLoading());
     try {
-      final products = await _homeServices.fetchProducts();
-      emit(HomeLoaded(products: products, carouselItems: homeCarouselItems));
+      final fetchedProducts = await _homeServices.fetchProducts();
+      products = fetchedProducts;
+      emit(
+        HomeLoaded(products: fetchedProducts, carouselItems: homeCarouselItems),
+      );
     } catch (e) {
       HomeError(message: e.toString());
     }

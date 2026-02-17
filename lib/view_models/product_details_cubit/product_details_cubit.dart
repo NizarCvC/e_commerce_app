@@ -1,11 +1,16 @@
 import 'package:e_commerce_app/models/add_to_cart_model.dart';
 import 'package:e_commerce_app/models/product_item_model.dart';
+import 'package:e_commerce_app/services/auth_services.dart';
+import 'package:e_commerce_app/services/product_details_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
+  final _productDetailsServices = ProductDetailsServicesImpl();
+  final _authServices = AuthServicesImpl();
+
   ProductDetailsCubit() : super(ProductDetailsInitial());
 
   Color? selectedColor;
@@ -40,17 +45,22 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
     selectedColor = color;
   }
 
-  void addToCart(String productId) {
+  Future<void> addToCart(String productId) async {
     emit(ProductAddingToCart());
-    final cartItem = AddToCartModel(
-      productId: productId,
-      quantity: quantity,
-      size: selectedSize,
-      color: selectedColor,
-    );
-    cartItems.add(cartItem);
-    Future.delayed(Duration(seconds: 1), () {
+    try {
+      final cartItem = AddToCartModel(
+        id: DateTime.now().toIso8601String(),
+        productId: productId,
+        quantity: quantity,
+        size: selectedSize,
+        color: selectedColor,
+      );
+      cartItems.add(cartItem); // TODO: you need to deleted
+      final currentUser = _authServices.currentUser();
+      await _productDetailsServices.addToCart(currentUser!.uid, cartItem);
       emit(ProductAddedToCart());
-    });
+    } catch (e) {
+      emit(ProductAddToCartError(message: e.toString()));
+    }
   }
 }

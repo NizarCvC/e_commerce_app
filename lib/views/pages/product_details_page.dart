@@ -141,7 +141,7 @@ class ProductDetailsPage extends StatelessWidget {
     return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       bloc: cubit,
       buildWhen: (previous, current) =>
-          current is ProductAddedToCart || current is ProductAddingToCart,
+          current is ProductAddedToCart || current is ProductAddingToCart || current is ProductAddToCartError,
       builder: (context, state) {
         if (state is ProductAddingToCart) {
           return ElevatedButton(
@@ -161,13 +161,14 @@ class ProductDetailsPage extends StatelessWidget {
         }
         return ElevatedButton.icon(
           onPressed: () {
-            if (cubit.selectedColor != null || cubit.selectedSize != null) {
-              cubit.addToCart(productId);
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Please select all required items.')),
-              );
-            }
+            cubit.addToCart(productId); 
+            // if (cubit.selectedColor != null || cubit.selectedSize != null) {
+            //   cubit.addToCart(productId);
+            // } else {
+            //   ScaffoldMessenger.of(context).showSnackBar(
+            //     SnackBar(content: Text('Please select all required items.')),
+            //   );
+            // }
           },
           style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
           label: Text(

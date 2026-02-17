@@ -39,3 +39,9 @@ final class ColorSelected extends ProductDetailsState {
 final class ProductAddingToCart extends ProductDetailsState {}
 
 final class ProductAddedToCart extends ProductDetailsState {}
+
+final class ProductAddToCartError extends ProductDetailsState {
+  final String message;
+
+  ProductAddToCartError({required this.message});
+}
