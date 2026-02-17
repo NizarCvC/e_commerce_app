@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/utils/app_color.dart';
+import 'package:e_commerce_app/view_models/category_cubit/categories_cubit.dart';
 import 'package:e_commerce_app/view_models/home_cubit/home_cubit.dart';
 import 'package:e_commerce_app/views/widgets/homepage_widgets/category_tab_view.dart';
 import 'package:e_commerce_app/views/widgets/homepage_widgets/home_tab_view.dart';
@@ -39,16 +40,26 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
           ),
           SizedBox(height: size.height * 0.02),
           Expanded(
-            child: BlocProvider(
-              create: (context) {
-                final cubit = HomeCubit();
-                cubit.getHomeData();
-                return cubit;
-              },
-              child: TabBarView(
-                controller: _tabController,
-                children: [HomeTabView(), CategoryTabView()],
-              ),
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                BlocProvider(
+                  create: (context) {
+                    final cubit = HomeCubit();
+                    cubit.getHomeData();
+                    return cubit;
+                  },
+                  child: HomeTabView(),
+                ),
+                BlocProvider(
+                  create: (context) {
+                    final cubit = CategoriesCubit();
+                    cubit.fetchCategories();
+                    return cubit;
+                  },
+                  child: CategoryTabView(),
+                ),
+              ],
             ),
           ),
         ],

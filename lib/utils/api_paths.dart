@@ -3,4 +3,6 @@ class ApiPaths {
   static String products() => 'products/';
   static String cartItem(String userId, String cartItemId) =>
       'users/$userId/cart/$cartItemId';
+  static String carouselItems() => 'announcements/';
+  static String categories() => 'caretgories/';
 }
