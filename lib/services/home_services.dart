@@ -26,7 +26,8 @@ class HomeServicesImpl implements HomeServices {
   Future<List<HomeCarouselItemModel>> fetchCarouselItems() async {
     return await _firestoreService.getCollection<HomeCarouselItemModel>(
       path: ApiPaths.carouselItems(),
-      builder: (data, documentId) => HomeCarouselItemModel.fromMap(data, documentId),
+      builder: (data, documentId) =>
+          HomeCarouselItemModel.fromMap(data, documentId),
     );
   }
 

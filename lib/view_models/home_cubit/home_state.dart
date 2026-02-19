@@ -18,3 +18,23 @@ final class HomeError extends HomeState {
 
   HomeError({required this.message});
 }
+
+final class SetFavoriteLoading extends HomeState {
+  final String productId;
+
+  SetFavoriteLoading({required this.productId});
+}
+
+final class SetFavoriteSuccess extends HomeState {
+  final String productId;
+  final bool isFavorite;
+
+  SetFavoriteSuccess({required this.productId, required this.isFavorite, });
+}
+
+final class SetFavoriteError extends HomeState {
+  final String productId;
+  final String message;
+
+  SetFavoriteError({required this.message, required this.productId});
+}

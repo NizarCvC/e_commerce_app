@@ -14,6 +14,7 @@ class HomeTabView extends StatelessWidget {
 
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: BlocProvider.of<HomeCubit>(context),
+      buildWhen: (previous, current) => current is HomeLoading || current is HomeLoaded || current is HomeError,
       builder: (context, state) {
         if (state is HomeLoading) {
           return const Scaffold(

@@ -5,4 +5,8 @@ class ApiPaths {
       'users/$userId/cart/$cartItemId';
   static String carouselItems() => 'announcements/';
   static String categories() => 'caretgories/';
+  static String favoriteProduct(String userId, String productId) =>
+      'users/$userId/favorites/$productId';
+  static String favoriteProducts(String userId) =>
+      'users/$userId/favorites/';
 }

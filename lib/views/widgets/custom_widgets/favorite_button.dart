@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class FavoriteButton extends StatefulWidget {
-  const FavoriteButton({super.key});
-
-  @override
-  State<FavoriteButton> createState() => _FavoriteButtonState();
-}
-
-class _FavoriteButtonState extends State<FavoriteButton> {
-  bool isFavorite = false;
+class FavoriteButton extends StatelessWidget {
+  final bool isFavorite;
+  final VoidCallback onTap;
+  final Color? iconColor;
+  const FavoriteButton({
+    super.key,
+    required this.onTap,
+    required this.isFavorite, this.iconColor = Colors.white70,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,10 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         width: size.width * 0.09,
         decoration: BoxDecoration(shape: .circle, color: Colors.white12),
         child: InkWell(
-          onTap: () => setState(() => isFavorite = !isFavorite),
+          onTap: onTap,
           child: Icon(
             isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: Colors.white70,
+            color: iconColor,
           ),
         ),
       ),

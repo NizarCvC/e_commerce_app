@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 enum ProductSize {
@@ -66,6 +67,32 @@ class ProductItemModel {
           "Hello World Hello World Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World",
       // availableSizes: map['availableSizes'] != null ? List<ProductSize>.from((map['availableSizes'] as List<int>).map<ProductSize?>((x) => ProductSize.fromMap(x as Map<String,dynamic>),),) : null,
       // availableColors: map['availableColors'] != null ? List<Color?>.from((map['availableColors'] as List<int>).map<Color??>((x) => Color?.fromMap(x as Map<String,dynamic>),),) : null,
+    );
+  }
+
+  ProductItemModel copyWith({
+    String? id,
+    String? name,
+    String? imageUrl,
+    double? price,
+    bool? isFavorite,
+    String? category,
+    double? averageRate,
+    String? description,
+    List<ProductSize>? availableSizes,
+    List<Color?>? availableColors,
+  }) {
+    return ProductItemModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      imageUrl: imageUrl ?? this.imageUrl,
+      price: price ?? this.price,
+      isFavorite: isFavorite ?? this.isFavorite,
+      category: category ?? this.category,
+      averageRate: averageRate ?? this.averageRate,
+      description: description ?? this.description,
+      availableSizes: availableSizes ?? this.availableSizes,
+      availableColors: availableColors ?? this.availableColors,
     );
   }
 }
