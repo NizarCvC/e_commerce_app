@@ -19,11 +19,19 @@ final class CartError extends CartState {
   CartError({required this.message});
 }
 
+final class QuantityCounterLoading extends CartState {}
+
 final class QuantityCounterLoaded extends CartState {
   final int value;
   final String productId;
 
   QuantityCounterLoaded({required this.value, required this.productId});
+}
+
+final class QuantityCounterError extends CartState {
+  final String message;
+
+  QuantityCounterError({required this.message});
 }
 
 final class SubtotalUpdated extends CartState {

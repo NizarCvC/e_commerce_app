@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/utils/app_assets.dart';
 import 'package:e_commerce_app/utils/app_routes.dart';
 import 'package:e_commerce_app/view_models/cart_cubit/cart_cubit.dart';
-import 'package:e_commerce_app/views/widgets/cart_page_widgets/cart_item.dart';
+import 'package:e_commerce_app/views/widgets/cart_item.dart';
 import 'package:e_commerce_app/views/widgets/custom_widgets/main_button.dart';
 import 'package:e_commerce_app/views/widgets/custom_widgets/total_price.dart';
 import 'package:flutter/material.dart';

@@ -1,14 +1,15 @@
+import 'package:e_commerce_app/models/add_to_cart_model.dart';
 import 'package:flutter/material.dart';
 
 class Counter extends StatelessWidget {
   final int value;
   final dynamic cubit;
-  final String? productId;
+  final AddToCartModel? cartItem;
   const Counter({
     super.key,
     required this.value,
     required this.cubit,
-    this.productId,
+    this.cartItem,
   });
 
   @override
@@ -31,8 +32,8 @@ class Counter extends StatelessWidget {
             child: IconButton(
               iconSize: size.height * 0.02,
               onPressed: () => (value > 1)
-                  ? ((productId != null)
-                        ? cubit.decrementCounter(value, productId)
+                  ? ((cartItem != null)
+                        ? cubit.decrementCounter(value, cartItem)
                         : cubit.decrementCounter(value))
                   : {},
               icon: Icon(
@@ -48,8 +49,8 @@ class Counter extends StatelessWidget {
             child: IconButton(
               iconSize: size.height * 0.02,
               onPressed: () => (value < 100)
-                  ? ((productId != null)
-                        ? cubit.incrementCounter(value, productId)
+                  ? ((cartItem != null)
+                        ? cubit.incrementCounter(value, cartItem)
                         : cubit.incrementCounter(value))
                   : {},
               icon: Icon(

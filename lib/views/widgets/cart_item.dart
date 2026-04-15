@@ -16,30 +16,30 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final productItem = products.singleWhere((e) => e.id == cartItem.productId);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
-          productImage(productItem, size),
+          productImage(cartItem.productItem, size),
           SizedBox(width: size.width * 0.05),
           Expanded(
             child: Column(
               crossAxisAlignment: .start,
               children: [
                 Text(
-                  productItem.name,
+                  cartItem.productItem.name,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 SizedBox(height: size.height * 0.005),
                 if (hasCounter) ...[
-                  productProperty(productItem, context),
+                  // TODO: Fix it
+                  // productProperty(productItem, context),
                   SizedBox(height: size.height * 0.005),
                   BlocBuilder<CartCubit, CartState>(
                     bloc: BlocProvider.of<CartCubit>(context),
                     buildWhen: (previous, current) =>
                         current is QuantityCounterLoaded &&
-                        current.productId == productItem.id,
+                        current.productId == cartItem.productItem.id,
                     builder: (context, state) {
                       return Row(
                         mainAxisAlignment: .spaceBetween,
@@ -47,12 +47,12 @@ class CartItem extends StatelessWidget {
                           productCounter(
                             BlocProvider.of<CartCubit>(context),
                             state,
-                            productItem,
+                            cartItem,
                           ),
                           productPrice(
                             context: context,
                             state: state,
-                            productItem: productItem,
+                            productItem: cartItem.productItem,
                           ),
                         ],
                       );
@@ -62,8 +62,9 @@ class CartItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: .spaceBetween,
                     children: [
-                      productProperty(productItem, context),
-                      productPrice(context: context, productItem: productItem),
+                      // TODO: fix it
+                      // productProperty(productItem, context),
+                      productPrice(context: context, productItem: cartItem.productItem),
                     ],
                   ),
                 ],
@@ -78,18 +79,18 @@ class CartItem extends StatelessWidget {
   Counter productCounter(
     CartCubit cubit,
     CartState state,
-    ProductItemModel productItem,
+    AddToCartModel cartItem,
   ) {
     if (state is QuantityCounterLoaded) {
       return Counter(
         value: state.value,
-        productId: productItem.id,
+        cartItem: cartItem,
         cubit: cubit,
       );
     } else {
       return Counter(
         value: cartItem.quantity,
-        productId: productItem.id,
+        cartItem: cartItem,
         cubit: cubit,
       );
     }

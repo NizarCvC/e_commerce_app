@@ -53,7 +53,7 @@ class AddToCartModel {
     );
   }
 }
-
+ 
 List<AddToCartModel> cartItems = [
   AddToCartModel(id: '1', productId: '2', quantity: 2, color: Colors.black),
   AddToCartModel(id: '2', productId: '6', quantity: 1, size: ProductSize.M),

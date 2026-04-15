@@ -2,6 +2,7 @@
     "cmake.ignoreCMakeListsMissing": true,
     "cSpell.words": [
         "allprojects",
+        "caretgories",
         "firestore"
     ]
 }

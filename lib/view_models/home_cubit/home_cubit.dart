@@ -27,8 +27,6 @@ class HomeCubit extends Cubit<HomeState> {
         final isFavorite = favoriteProducts.any((e) => e.id == product.id);
         return product.copyWith(isFavorite: isFavorite);
       }).toList();
-
-      products = fetchedProducts;
       emit(
         HomeLoaded(products: fetchedProducts, carouselItems: homeCarouselItems),
       );

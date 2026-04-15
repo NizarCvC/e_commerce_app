@@ -2,7 +2,7 @@ import 'package:e_commerce_app/models/location_item_model.dart';
 import 'package:e_commerce_app/utils/app_color.dart';
 import 'package:e_commerce_app/view_models/choose_location_cubit/choose_location_cubit.dart';
 import 'package:e_commerce_app/views/widgets/custom_widgets/main_button.dart';
-import 'package:e_commerce_app/views/widgets/add_new_address_widgets/location_item.dart';
+import 'package:e_commerce_app/views/widgets/location_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

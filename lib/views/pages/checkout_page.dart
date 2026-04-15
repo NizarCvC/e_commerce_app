@@ -4,7 +4,7 @@ import 'package:e_commerce_app/models/payment_card_model.dart';
 import 'package:e_commerce_app/utils/app_routes.dart';
 import 'package:e_commerce_app/view_models/checkout_cubit/checkout_cubit.dart';
 import 'package:e_commerce_app/view_models/payment_method_cubit/payment_method_cubit.dart';
-import 'package:e_commerce_app/views/widgets/cart_page_widgets/cart_item.dart';
+import 'package:e_commerce_app/views/widgets/cart_item.dart';
 import 'package:e_commerce_app/views/widgets/checkout_page_widgets/checkout_headline_item.dart';
 import 'package:e_commerce_app/views/widgets/custom_widgets/main_button.dart';
 import 'package:e_commerce_app/views/widgets/checkout_page_widgets/payment_method_bottom_sheet.dart';

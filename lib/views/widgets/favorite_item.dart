@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/models/product_item_model.dart';
 import 'package:e_commerce_app/view_models/favorite_cubit/favorite_cubit.dart';

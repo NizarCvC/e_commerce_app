@@ -1,14 +1,14 @@
 import 'package:e_commerce_app/models/add_to_cart_model.dart';
 import 'package:e_commerce_app/models/product_item_model.dart';
 import 'package:e_commerce_app/services/auth_services.dart';
-import 'package:e_commerce_app/services/product_details_services.dart';
+import 'package:e_commerce_app/services/cart_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
-  final _productDetailsServices = ProductDetailsServicesImpl();
+  final _cartServices = CartServicesImpl();
   final _authServices = AuthServicesImpl();
 
   ProductDetailsCubit() : super(ProductDetailsInitial());
@@ -55,9 +55,8 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         size: selectedSize,
         color: selectedColor,
       );
-      cartItems.add(cartItem); // TODO: you need to deleted
       final currentUser = _authServices.currentUser();
-      await _productDetailsServices.addToCart(currentUser!.uid, cartItem);
+      await _cartServices.addToCart(currentUser!.uid, cartItem);
       emit(ProductAddedToCart());
     } catch (e) {
       emit(ProductAddToCartError(message: e.toString()));

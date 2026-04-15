@@ -141,7 +141,9 @@ class ProductDetailsPage extends StatelessWidget {
     return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
       bloc: cubit,
       buildWhen: (previous, current) =>
-          current is ProductAddedToCart || current is ProductAddingToCart || current is ProductAddToCartError,
+          current is ProductAddedToCart ||
+          current is ProductAddingToCart ||
+          current is ProductAddToCartError,
       builder: (context, state) {
         if (state is ProductAddingToCart) {
           return ElevatedButton(
@@ -161,7 +163,7 @@ class ProductDetailsPage extends StatelessWidget {
         }
         return ElevatedButton.icon(
           onPressed: () {
-            cubit.addToCart(productId); 
+            cubit.addToCart(productId);
             // if (cubit.selectedColor != null || cubit.selectedSize != null) {
             //   cubit.addToCart(productId);
             // } else {
@@ -252,6 +254,17 @@ class ProductDetailsPage extends StatelessWidget {
                     imageUrl: product.imageUrl,
                     width: double.infinity,
                     fit: .cover,
+                  ),
+                ),
+                Container(
+                  height: size.height * 0.48,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: .center,
+                      end: .bottomCenter,
+                      colors: [Colors.black26, Colors.black26],
+                    ),
                   ),
                 ),
                 Padding(
